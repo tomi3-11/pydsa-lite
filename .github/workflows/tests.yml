@@ -16,9 +16,15 @@ jobs:
         uses: actions/setup-python@v5
         with:
           python-version: "3.13"
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
       - name: Install documentation dependencies
         run: |
           python -m pip install --upgrade pip
           python -m pip install -r requirements-dev.txt
+      - name: Check playground JavaScript syntax
+        run: node --check docs/js/playground.js
       - name: Build documentation
         run: mkdocs build --strict
