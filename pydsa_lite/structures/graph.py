@@ -43,7 +43,7 @@ class Graph(Generic[V]):
         if source not in self._adjacency or target not in self._adjacency[source]:
             raise KeyError((source, target))
         del self._adjacency[source][target]
-        if not self.directed:
+        if not self.directed and source != target:
             del self._adjacency[target][source]
 
     def remove_vertex(self, vertex: V) -> None:
