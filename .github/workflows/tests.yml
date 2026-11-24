@@ -1,4 +1,4 @@
-name: Tests
+name: Documentation
 
 on:
   push:
@@ -7,27 +7,24 @@ on:
     branches: [main]
 
 jobs:
-  test:
+  docs:
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        python-version: ["3.10", "3.11", "3.12", "3.13"]
     steps:
       - name: Check out repository
         uses: actions/checkout@v4
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: ${{ matrix.python-version }}
-      - name: Install package and test dependencies
+          python-version: "3.13"
+      - name: Set up Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+      - name: Install documentation dependencies
         run: |
           python -m pip install --upgrade pip
-          python -m pip install -e ".[dev]"
-      - name: Run tests
-        run: python -m pytest
-      - name: Run structure examples
-        run: |
-          python examples/structures/linked_lists.py
-          python examples/structures/stack.py
-          python examples/structures/queue.py
+          python -m pip install -r requirements-dev.txt
+      - name: Check playground JavaScript syntax
+        run: node --check docs/js/playground.js
+      - name: Build documentation
+        run: mkdocs build --strict

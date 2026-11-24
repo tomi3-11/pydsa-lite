@@ -1,41 +1,45 @@
-# Contributing to pydsa-lite
+# Contributing to Python DSA Learning Lab
 
-Thank you for considering a contribution. This project helps beginners understand data structures, algorithms, and complexity. Clarity is more important than cleverness.
+Thank you for helping make data structures and algorithms easier to understand. This repository is a learning resource and browser playground, not a reusable data-structures package.
 
-## Before you start
+## What makes a good contribution?
 
-1. Read the relevant documentation and implementation.
-2. Check open issues to avoid duplicate work.
-3. For substantial changes, discuss the idea in an issue first.
-4. Keep each pull request focused on one logical change.
+- Explain the problem before presenting code.
+- Prefer Python built-ins and standard-library modules in practical examples.
+- Label from-scratch implementations as learning exercises, not production recommendations.
+- Explain invariants, time complexity, auxiliary space, and trade-offs.
+- Include a worked example and meaningful edge cases.
+- Keep exercises separate from hints and reference solutions.
+- Keep the documentation beginner-friendly without being inaccurate.
 
 ## Development setup
 
-Clone the repository, create and activate a virtual environment, then install the development extras with: python -m pip install -e ".[dev]".
+~~~bash
+python -m venv .venv
+source .venv/bin/activate
+python -m pip install -r requirements-dev.txt
+mkdocs serve
+~~~
 
-## Branch and pull request workflow
+Build the site with strict validation:
 
-Use descriptive branches such as feat/stack-queue, feat/binary-search, docs/linked-lists, or fix/empty-graph-traversal. Open pull requests against main, explain the reason for the change, link the related issue, and describe how you tested it.
+~~~bash
+mkdocs build --strict
+~~~
 
-## Code expectations
+## Playground contributions
 
-- Use type hints and clear, beginner-friendly names.
-- Add docstrings to public classes and functions.
-- Explain non-obvious steps without narrating every line.
-- Validate invalid inputs consistently and document behavior.
-- State important invariants and time/space complexity.
-- Keep core code dependent on the Python standard library only.
-- Include runnable examples and tests for new public behavior.
+The playground runs client-side with Pyodide. Keep examples short and deterministic. Do not assume filesystem, network, subprocess, or native operating-system access. Explain when a standard-library module behaves differently in WebAssembly.
 
-## Run checks
+## Pull requests
 
-Run the test suite with python -m pytest. For documentation changes, also run mkdocs build --strict.
+Use a focused branch and pull request. Link the related issue, explain the learning objective, and include validation steps. Avoid adding plugins or JavaScript dependencies unless they solve a concrete problem.
 
-## Pull request checklist
+## Review checklist
 
-- [ ] The change addresses one focused issue.
-- [ ] Tests cover normal and relevant edge cases.
-- [ ] Documentation and examples are updated.
-- [ ] Complexity claims are accurate.
-- [ ] The full test suite passes.
-- [ ] No unnecessary runtime dependencies were added.
+- [ ] The learning objective is clear.
+- [ ] Python examples use built-ins or the standard library where practical.
+- [ ] Complexity claims and assumptions are accurate.
+- [ ] Exercises, hints, and solutions are clearly separated.
+- [ ] Playground examples work in the browser.
+- [ ] mkdocs build --strict passes.

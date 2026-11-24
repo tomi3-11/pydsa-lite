@@ -1,0 +1,44 @@
+site_name: Python DSA Learning Lab
+site_description: Learn data structures and algorithms with idiomatic Python and an interactive playground.
+site_url: https://tomi3-11.github.io/pydsa-lite/
+repo_url: https://github.com/tomi3-11/pydsa-lite
+repo_name: tomi3-11/pydsa-lite
+
+theme:
+  name: readthedocs
+  highlightjs: true
+  hljs_languages:
+    - python
+    - bash
+
+plugins:
+  - search
+
+markdown_extensions:
+  - toc:
+      permalink: true
+  - tables
+  - fenced_code
+  - admonition
+  - attr_list
+
+nav:
+  - Home: index.md
+  - Start here:
+      - Learning path: start/learning-path.md
+      - Complexity analysis: foundations/complexity.md
+  - Data structures:
+      - Choosing a structure: data-structures/index.md
+  - Algorithms:
+      - Overview: algorithms/index.md
+  - Playground:
+      - Python playground: playground/index.md
+
+extra_javascript:
+  - https://cdn.jsdelivr.net/pyodide/v314.0.8/full/pyodide.js
+  - js/playground.js
+
+extra_css:
+  - css/site.css
+
+strict: true
