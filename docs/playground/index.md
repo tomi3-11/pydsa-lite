@@ -25,9 +25,10 @@ while tasks:
 ## What it can and cannot do
 
 - Code runs locally in the browser; it is not sent to a project server.
-- The initial runtime download can take a few seconds.
+- The initial runtime download can take a few seconds. Press Ctrl+Enter (or Cmd+Enter) to run code.
 - The standard library is available, with some WebAssembly-specific limitations.
 - Native extensions and operating-system features may not work exactly as they do on desktop Python.
+- This is not a hardened sandbox. Pyodide exposes browser APIs to Python code, so only run code you understand.
 - Do not paste secrets or sensitive data into a playground.
 
 For full development, debugging, files, and test suites, use a local Python environment. The playground is for short experiments, not a replacement for your editor.
