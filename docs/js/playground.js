@@ -22,7 +22,10 @@
         throw new Error("Pyodide did not load. Check your network connection and reload.");
       }
       setStatus("Loading Python runtime…");
-      runtimePromise = window.loadPyodide();
+      runtimePromise = window.loadPyodide().catch((error) => {
+        runtimePromise = null;
+        throw error;
+      });
     }
     return runtimePromise;
   }
@@ -48,7 +51,10 @@
       });
 
       setStatus("Running…");
-      await pyodide.runPythonAsync(editor.value);
+      const result = await pyodide.runPythonAsync(editor.value);
+      if (result !== undefined && result !== null) {
+        output.textContent += String(result);
+      }
       if (!output.textContent) output.textContent = "(No output)";
       setStatus("Finished.");
     } catch (error) {
@@ -61,6 +67,12 @@
   }
 
   runButton.addEventListener("click", runCode);
+  editor.addEventListener("keydown", (event) => {
+    if ((event.ctrlKey || event.metaKey) && event.key === "Enter") {
+      event.preventDefault();
+      runCode();
+    }
+  });
   resetButton.addEventListener("click", () => {
     editor.value = starterCode;
     output.textContent = "Output will appear here.";
