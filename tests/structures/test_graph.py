@@ -37,3 +37,10 @@ def test_missing_vertex_and_edge_raise():
     with pytest.raises(KeyError): graph.remove_vertex(10)
     with pytest.raises(KeyError): graph.remove_edge(1, 2)
     with pytest.raises(KeyError): graph.edge_weight(1, 2)
+
+def test_undirected_self_loop_can_be_removed():
+    graph = Graph[str]()
+    graph.add_edge("A", "A")
+    assert graph.has_edge("A", "A")
+    graph.remove_edge("A", "A")
+    assert not graph.has_edge("A", "A")
