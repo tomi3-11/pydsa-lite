@@ -52,6 +52,15 @@ def test_singly_pop_front_and_empty_error():
         items.pop_front()
 
 
+def test_singly_remove_only_first_duplicate():
+    items = SinglyLinkedList([7, 7, 8])
+
+    items.remove(7)
+
+    assert list(items) == [7, 8]
+    assert len(items) == 2
+
+
 def test_doubly_pop_both_ends_and_reverse():
     items = DoublyLinkedList([1, 2, 3])
 
@@ -65,6 +74,19 @@ def test_doubly_pop_both_ends_and_reverse():
 
     with pytest.raises(IndexError):
         items.pop_back()
+
+
+def test_doubly_remove_head_and_tail_preserves_end_links():
+    items = DoublyLinkedList([1, 2, 3, 4])
+
+    items.remove(1)
+    assert list(items) == [2, 3, 4]
+    assert items._head.previous is None
+
+    items.remove(4)
+    assert list(items) == [2, 3]
+    assert items._tail.next is None
+    assert list(reversed(items)) == [3, 2]
 
 
 def test_doubly_links_are_reconnected_after_middle_removal():
