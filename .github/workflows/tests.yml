@@ -31,3 +31,7 @@ jobs:
           python examples/structures/linked_lists.py
           python examples/structures/stack.py
           python examples/structures/queue.py
+          python examples/structures/hash_table.py
+          python examples/structures/binary_search_tree.py
+          python examples/structures/min_heap.py
+          python examples/structures/graph.py
