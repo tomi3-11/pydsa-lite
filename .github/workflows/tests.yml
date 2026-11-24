@@ -26,3 +26,8 @@ jobs:
           python -m pip install -e ".[dev]"
       - name: Run tests
         run: python -m pytest
+      - name: Run structure examples
+        run: |
+          python examples/structures/linked_lists.py
+          python examples/structures/stack.py
+          python examples/structures/queue.py
